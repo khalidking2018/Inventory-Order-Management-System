@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Package, 
-  Users, 
-  ShoppingCart, 
-  AlertTriangle, 
-  Trash2, 
-  Edit, 
-  Plus, 
-  Search, 
-  X, 
-  DollarSign, 
-  Calendar, 
+import {
+  Package,
+  Users,
+  ShoppingCart,
+  AlertTriangle,
+  Trash2,
+  Edit,
+  Plus,
+  Search,
+  X,
+  DollarSign,
+  Calendar,
   Info,
   Layers
 } from 'lucide-react';
 
-const API_BASE = '/api';
+const API_BASE = 'https://inventory-backend-xxxx.onrender.com/api';
+
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -81,8 +82,8 @@ export default function App() {
   // Product Actions
   const handleProductSubmit = async (e) => {
     e.preventDefault();
-    const url = productModal.mode === 'create' 
-      ? `${API_BASE}/products/` 
+    const url = productModal.mode === 'create'
+      ? `${API_BASE}/products/`
       : `${API_BASE}/products/${productModal.data.id}`;
     const method = productModal.mode === 'create' ? 'POST' : 'PUT';
 
@@ -240,17 +241,17 @@ export default function App() {
   };
 
   // Filtering lists
-  const filteredProducts = products.filter(p => 
+  const filteredProducts = products.filter(p =>
     p.name.toLowerCase().includes(searchProduct.toLowerCase()) ||
     p.sku.toLowerCase().includes(searchProduct.toLowerCase())
   );
 
-  const filteredCustomers = customers.filter(c => 
+  const filteredCustomers = customers.filter(c =>
     c.name.toLowerCase().includes(searchCustomer.toLowerCase()) ||
     c.email.toLowerCase().includes(searchCustomer.toLowerCase())
   );
 
-  const filteredOrders = orders.filter(o => 
+  const filteredOrders = orders.filter(o =>
     o.id.toString().includes(searchOrder) ||
     o.customer.name.toLowerCase().includes(searchOrder.toLowerCase())
   );
@@ -266,7 +267,7 @@ export default function App() {
         <nav>
           <ul className="nav-links">
             <li>
-              <button 
+              <button
                 onClick={() => setActiveTab('dashboard')}
                 className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
                 style={{ width: '100%', border: 'none', background: 'none', textAlign: 'left' }}
@@ -276,7 +277,7 @@ export default function App() {
               </button>
             </li>
             <li>
-              <button 
+              <button
                 onClick={() => setActiveTab('products')}
                 className={`nav-item ${activeTab === 'products' ? 'active' : ''}`}
                 style={{ width: '100%', border: 'none', background: 'none', textAlign: 'left' }}
@@ -286,7 +287,7 @@ export default function App() {
               </button>
             </li>
             <li>
-              <button 
+              <button
                 onClick={() => setActiveTab('customers')}
                 className={`nav-item ${activeTab === 'customers' ? 'active' : ''}`}
                 style={{ width: '100%', border: 'none', background: 'none', textAlign: 'left' }}
@@ -296,7 +297,7 @@ export default function App() {
               </button>
             </li>
             <li>
-              <button 
+              <button
                 onClick={() => setActiveTab('orders')}
                 className={`nav-item ${activeTab === 'orders' ? 'active' : ''}`}
                 style={{ width: '100%', border: 'none', background: 'none', textAlign: 'left' }}
@@ -366,7 +367,7 @@ export default function App() {
                 <span>Low Stock Items Alert</span>
                 <span className="badge badge-warning">Threshold &lt; 10 units</span>
               </div>
-              
+
               <div className="table-container">
                 {dashboard.low_stock_products.length === 0 ? (
                   <p style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: '24px' }}>All product stocks are healthy!</p>
@@ -417,9 +418,9 @@ export default function App() {
 
             <div className="data-card">
               <div className="filters-bar">
-                <input 
-                  type="text" 
-                  placeholder="Search by product name or SKU..." 
+                <input
+                  type="text"
+                  placeholder="Search by product name or SKU..."
                   className="form-control search-input"
                   value={searchProduct}
                   onChange={(e) => setSearchProduct(e.target.value)}
@@ -483,9 +484,9 @@ export default function App() {
 
             <div className="data-card">
               <div className="filters-bar">
-                <input 
-                  type="text" 
-                  placeholder="Search by name or email..." 
+                <input
+                  type="text"
+                  placeholder="Search by name or email..."
                   className="form-control search-input"
                   value={searchCustomer}
                   onChange={(e) => setSearchCustomer(e.target.value)}
@@ -544,9 +545,9 @@ export default function App() {
 
             <div className="data-card">
               <div className="filters-bar">
-                <input 
-                  type="text" 
-                  placeholder="Search by Order ID or Customer Name..." 
+                <input
+                  type="text"
+                  placeholder="Search by Order ID or Customer Name..."
                   className="form-control search-input"
                   value={searchOrder}
                   onChange={(e) => setSearchOrder(e.target.value)}
@@ -614,46 +615,46 @@ export default function App() {
               <div className="modal-body">
                 <div className="form-group">
                   <label className="form-label">Product Name</label>
-                  <input 
-                    type="text" 
-                    required 
+                  <input
+                    type="text"
+                    required
                     className="form-control"
-                    value={productForm.name} 
-                    onChange={e => setProductForm({...productForm, name: e.target.value})}
+                    value={productForm.name}
+                    onChange={e => setProductForm({ ...productForm, name: e.target.value })}
                   />
                 </div>
                 <div className="form-group">
                   <label className="form-label">SKU Code</label>
-                  <input 
-                    type="text" 
-                    required 
+                  <input
+                    type="text"
+                    required
                     disabled={productModal.mode === 'edit'}
                     className="form-control"
-                    value={productForm.sku} 
-                    onChange={e => setProductForm({...productForm, sku: e.target.value})}
+                    value={productForm.sku}
+                    onChange={e => setProductForm({ ...productForm, sku: e.target.value })}
                   />
                 </div>
                 <div className="form-group">
                   <label className="form-label">Price ($)</label>
-                  <input 
-                    type="number" 
-                    step="0.01" 
-                    min="0" 
-                    required 
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    required
                     className="form-control"
-                    value={productForm.price} 
-                    onChange={e => setProductForm({...productForm, price: e.target.value})}
+                    value={productForm.price}
+                    onChange={e => setProductForm({ ...productForm, price: e.target.value })}
                   />
                 </div>
                 <div className="form-group">
                   <label className="form-label">Quantity in Stock</label>
-                  <input 
-                    type="number" 
-                    min="0" 
-                    required 
+                  <input
+                    type="number"
+                    min="0"
+                    required
                     className="form-control"
-                    value={productForm.quantity} 
-                    onChange={e => setProductForm({...productForm, quantity: e.target.value})}
+                    value={productForm.quantity}
+                    onChange={e => setProductForm({ ...productForm, quantity: e.target.value })}
                   />
                 </div>
               </div>
@@ -678,32 +679,32 @@ export default function App() {
               <div className="modal-body">
                 <div className="form-group">
                   <label className="form-label">Full Name</label>
-                  <input 
-                    type="text" 
-                    required 
+                  <input
+                    type="text"
+                    required
                     className="form-control"
-                    value={customerForm.name} 
-                    onChange={e => setCustomerForm({...customerForm, name: e.target.value})}
+                    value={customerForm.name}
+                    onChange={e => setCustomerForm({ ...customerForm, name: e.target.value })}
                   />
                 </div>
                 <div className="form-group">
                   <label className="form-label">Email Address</label>
-                  <input 
-                    type="email" 
-                    required 
+                  <input
+                    type="email"
+                    required
                     className="form-control"
-                    value={customerForm.email} 
-                    onChange={e => setCustomerForm({...customerForm, email: e.target.value})}
+                    value={customerForm.email}
+                    onChange={e => setCustomerForm({ ...customerForm, email: e.target.value })}
                   />
                 </div>
                 <div className="form-group">
                   <label className="form-label">Phone Number</label>
-                  <input 
-                    type="text" 
-                    required 
+                  <input
+                    type="text"
+                    required
                     className="form-control"
-                    value={customerForm.phone} 
-                    onChange={e => setCustomerForm({...customerForm, phone: e.target.value})}
+                    value={customerForm.phone}
+                    onChange={e => setCustomerForm({ ...customerForm, phone: e.target.value })}
                   />
                 </div>
               </div>
@@ -728,8 +729,8 @@ export default function App() {
               <div className="modal-body">
                 <div className="form-group">
                   <label className="form-label">Customer</label>
-                  <select 
-                    required 
+                  <select
+                    required
                     className="form-control"
                     value={orderForm.customer_id}
                     onChange={e => setOrderForm({ ...orderForm, customer_id: e.target.value })}
@@ -748,12 +749,12 @@ export default function App() {
                       + Add Item
                     </button>
                   </label>
-                  
+
                   {orderForm.items.map((item, index) => (
                     <div key={index} className="order-item-row">
                       <div>
-                        <select 
-                          required 
+                        <select
+                          required
                           className="form-control"
                           value={item.product_id}
                           onChange={e => updateOrderItemField(index, 'product_id', e.target.value)}
@@ -767,20 +768,20 @@ export default function App() {
                         </select>
                       </div>
                       <div>
-                        <input 
-                          type="number" 
-                          min="1" 
+                        <input
+                          type="number"
+                          min="1"
                           required
-                          placeholder="Qty" 
+                          placeholder="Qty"
                           className="form-control"
                           value={item.quantity}
                           onChange={e => updateOrderItemField(index, 'quantity', e.target.value)}
                         />
                       </div>
                       <div>
-                        <button 
-                          type="button" 
-                          className="btn btn-danger" 
+                        <button
+                          type="button"
+                          className="btn btn-danger"
                           style={{ padding: '10px' }}
                           disabled={orderForm.items.length === 1}
                           onClick={() => removeOrderItemField(index)}
