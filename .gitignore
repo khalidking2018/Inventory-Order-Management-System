@@ -1,0 +1,25 @@
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+.pytest_cache/
+.venv/
+venv/
+ENV/
+
+# Node
+node_modules/
+dist/
+build/
+.eslintcache
+
+# Logs
+*.log
+
+# Docker
+.docker_temp/
