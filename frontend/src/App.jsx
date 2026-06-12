@@ -15,7 +15,7 @@ import {
   Layers
 } from 'lucide-react';
 
-const API_BASE = 'https://inventory-backend-xxxx.onrender.com/api';
+const API_BASE = 'https://inventory-backend-latest-tvra.onrender.com/api';
 
 
 export default function App() {
